@@ -1,9 +1,12 @@
 .scroll {
 	overflow: scroll;
-	border: 1px solid black;
-	height: 700px;
+	height: 100%;
+	position: fixed;
+}
+::-webkit-scrollbar {
+	display: none;
 }
 
 .bg-custom {
-	background: #f2ffd9;
+	background: #ffffff;
 }

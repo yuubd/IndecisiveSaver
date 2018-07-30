@@ -1,0 +1,15 @@
+input::placeholder {
+	color: #dbdbdb;
+}
+.b--color {
+	border: #dbdbdb;
+}
+.w-h {
+	width: 100%;
+	height: 10px;
+}
+
+.etc {
+	outline-color: transparent;
+	outline-style: none;
+}

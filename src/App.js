@@ -32,8 +32,8 @@ class App extends Component {
 		return (
 			<div>
 				<Navigation />
+				<SearchBox searchChange={this.onSearchChange} />
 				<Scroll>
-					<SearchBox searchChange={this.onSearchChange} />
 					<PlaceList restaurants={filteredrestaurants} />
 				</Scroll>
 			</div>

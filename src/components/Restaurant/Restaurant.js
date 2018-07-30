@@ -1,6 +1,7 @@
 import React from 'react';
 import hamburger from './public/hamburger.png';
-
+import './Restaurant.css';
+import './Restaurant.css';
 const makeBurger = (id) => {
 	return (
 		<li key={id}>
@@ -24,7 +25,7 @@ const Restaurant = (props) => {
 		<div className="flex flex-column">
 			{props.name}
 			<img
-				className="pa0 ma0 bn w5"
+				className="with-prop pa0 ma0 bn"
 				src={require(`${props.imageURL}`)}
 				alt={props.imageURL}
 			/>
@@ -33,6 +34,7 @@ const Restaurant = (props) => {
 			{props.location}
 			{props.amount}
 			{props.fullness}
+			<br />
 		</div>
 	);
 };
