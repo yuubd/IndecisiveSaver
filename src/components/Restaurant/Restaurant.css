@@ -1,6 +1,10 @@
 .width-prop {
 	position: relative;
+<<<<<<< HEAD
 	width: 40.0%;
+=======
+	width: 33.33333%;
+>>>>>>> scroll height ajusted
 }
 
 @media screen and (min-width: 10px) {
@@ -11,6 +15,10 @@
 
 .text {
 	font-size: 4vw;
+<<<<<<< HEAD
 	font-weight: bolder;
 	width: 60%;
+=======
+	width: 66.66666%;
+>>>>>>> scroll height ajusted
 }

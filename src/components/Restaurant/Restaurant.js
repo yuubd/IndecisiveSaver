@@ -32,6 +32,7 @@ const Restaurant = (props) => {
 					alt={props.imageURL}
 				/>
 			</div>
+<<<<<<< HEAD
 			<ul className="text flex list flex-column ma0 pa0">
 				<p className="pa0 ma0 fw-b">{props.name}</p>
 				<ul className="text flex list ma0 pa0">
@@ -39,6 +40,13 @@ const Restaurant = (props) => {
 					<ul className="flex flex-row list pa0 ma0 bn">
 						{burgers(props.count)}
 					</ul>
+=======
+			<ul className="text flex list flex-column ma0 pa0 ">
+				<p className={fontStyle}>{props.name}</p>
+				<p className={fontStyle}>{props.visitedBy}</p>
+				<ul className="flex flex-row list pa0 ma0 bn">
+					{burgers(props.count)}
+>>>>>>> scroll height ajusted
 				</ul>
 				<p className={fontStyle}>{props.location}</p>
 				<p className={fontStyle}>${props.amount}</p>
