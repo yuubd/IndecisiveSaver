@@ -1,7 +1,7 @@
 import React from 'react';
 import hamburger from './public/hamburger.png';
 import './Restaurant.css';
-import './Restaurant.css';
+
 const makeBurger = (id) => {
 	return (
 		<li key={id}>
@@ -9,6 +9,8 @@ const makeBurger = (id) => {
 		</li>
 	);
 };
+
+const fontStyle = 'fw1 pa0 ma0';
 
 const Restaurant = (props) => {
 	const burgers = (count) => {
@@ -22,18 +24,24 @@ const Restaurant = (props) => {
 	};
 
 	return (
-		<div className="flex flex-column">
-			{props.name}
-			<img
-				className="with-prop pa0 ma0 bn"
-				src={require(`${props.imageURL}`)}
-				alt={props.imageURL}
-			/>
-			{props.visitedBy}
-			<ul className="flex flex-row list pa0 ma0 bn">{burgers(props.count)}</ul>
-			{props.location}
-			{props.amount}
-			{props.fullness}
+		<div className="flex">
+			<div className="width-prop">
+				<img
+					className="pa0 ma0 bn"
+					src={require(`${props.imageURL}`)}
+					alt={props.imageURL}
+				/>
+			</div>
+			<ul className="text flex list flex-column ma0 pa0 ">
+				<p className={fontStyle}>{props.name}</p>
+				<p className={fontStyle}>{props.visitedBy}</p>
+				<ul className="flex flex-row list pa0 ma0 bn">
+					{burgers(props.count)}
+				</ul>
+				<p className={fontStyle}>{props.location}</p>
+				<p className={fontStyle}>${props.amount}</p>
+				<p className={fontStyle}>{props.fullness}</p>
+			</ul>
 			<br />
 		</div>
 	);
