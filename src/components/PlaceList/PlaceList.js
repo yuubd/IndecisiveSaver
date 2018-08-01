@@ -18,7 +18,7 @@ const PlaceList = ({ restaurants }) => {
 	});
 
 	return (
-		<ul className="pl0 flex flex-column justify-start list">
+		<ul className="pl0 pa0 ma0 flex flex-column justify-start list">
 			{restauantComponent}
 		</ul>
 	);
