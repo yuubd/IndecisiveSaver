@@ -1,4 +1,5 @@
-.with-prop {
+.width-prop {
+	position: relative;
 	width: 33.33333%;
 }
 
@@ -6,4 +7,9 @@
 	.width-prop {
 		width: 33.33333%;
 	}
+}
+
+.text {
+	font-size: 4vw;
+	width: 66.66666%;
 }
