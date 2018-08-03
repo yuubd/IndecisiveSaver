@@ -2,6 +2,7 @@ import React from 'react';
 import hamburger from './public/hamburger.png';
 import './Restaurant.css';
 import './Restaurant.css';
+
 const makeBurger = (id) => {
 	return (
 		<li key={id}>

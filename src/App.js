@@ -14,13 +14,11 @@ class App extends Component {
 			searchfield: ''
 		};
 	}
-
 	onSearchChange = (event) => {
 		this.setState({
 			searchfield: event.target.value
 		});
 	};
-
 	render() {
 		const { restaurants, searchfield } = this.state;
 		const filteredrestaurants = restaurants.filter((restaurants) => {
