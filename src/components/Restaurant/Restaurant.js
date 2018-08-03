@@ -1,15 +1,10 @@
 import React from 'react';
 import hamburger from './public/hamburger.png';
 import './Restaurant.css';
-<<<<<<< HEAD
-=======
-import './Restaurant.css';
->>>>>>> master
 
 const makeBurger = (id) => {
 	return (
 		<li key={id}>
-			<img className="pa0 ma0 bn mw1" src={hamburger} alt="ham" />
 			<img className="pa0 ma0 bn mw1" src={hamburger} alt="ham" />
 		</li>
 	);
