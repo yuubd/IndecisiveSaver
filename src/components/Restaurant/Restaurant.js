@@ -6,6 +6,7 @@ const makeBurger = (id) => {
 	return (
 		<li key={id}>
 			<img className="pa0 ma0 bn mw1" src={hamburger} alt="ham" />
+			<img className="pa0 ma0 bn mw1" src={hamburger} alt="ham" />
 		</li>
 	);
 };
