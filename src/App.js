@@ -30,7 +30,7 @@ class App extends Component {
 		});
 
 		return (
-			<div>
+			<div className="pa0 ma0 width-middle">
 				<Navigation />
 				<SearchBox searchChange={this.onSearchChange} />
 				<Scroll>
