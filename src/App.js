@@ -28,7 +28,7 @@ class App extends Component {
 		});
 
 		return (
-			<div>
+			<div className="width-middle">
 				<Navigation />
 				<SearchBox searchChange={this.onSearchChange} />
 				<Scroll>
