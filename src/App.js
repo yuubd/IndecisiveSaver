@@ -10,9 +10,9 @@ import { setSearchField } from './actions';
 
 // this can replace searchField in the state
 const mapStateToProps = (state) => {
-	console.log(state.searchRobots);
+	console.log(state.searchField);
 	return {
-		//searchField: state.searchRobots.searchField
+		searchField: state.searchPlaces.searchField
 	};
 };
 
