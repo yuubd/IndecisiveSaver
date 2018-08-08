@@ -8,12 +8,15 @@ import registerServiceWorker from './registerServiceWorker';
 import { searchRobots } from './reducers';
 import 'tachyons';
 
+// usually because there are many reducers the parameter should be rootReducer
 const store = createStore(searchRobots);
 
 ReactDOM.render(
+	// provider makes the props to be accessed from top to bottom components
 	<Provider store={store}>
 		<App />
 	</Provider>,
 	document.getElementById('root')
 );
+
 registerServiceWorker();
