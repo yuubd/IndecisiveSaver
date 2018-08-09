@@ -10,7 +10,9 @@ import { searchPlaces } from './reducers';
 import 'tachyons';
 
 const logger = createLogger();
+
 // usually because there are many reducers the parameter should be rootReducer
+// middleware goes as the second parameter
 const store = createStore(searchPlaces, applyMiddleware(logger));
 
 ReactDOM.render(
