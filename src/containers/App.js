@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Navigation from './components/Navigation/Navigation';
-import PlaceList from './components/PlaceList/PlaceList';
-import SearchBox from './components/SearchBox/SearchBox';
-import { restaurants } from './components/Restaurant/restaurants.js';
-import Scroll from './components/Scroll/Scroll';
+import Navigation from '../components/Navigation/Navigation';
+import PlaceList from '../components/PlaceList/PlaceList';
+import SearchBox from '../components/SearchBox/SearchBox';
+import { restaurants } from '../components/Restaurant/restaurants';
+import Scroll from '../components/Scroll/Scroll';
 import './App.css';
-import { setSearchField } from './actions';
+import { setSearchField } from '../actions';
 
 // this can replace searchField in the state
 const mapStateToProps = (state) => {
-	console.log(state.searchField);
 	return {
-		searchField: state.searchPlaces.searchField
+		searchField: state.searchField
 	};
 };
 
@@ -34,11 +33,11 @@ class App extends Component {
 
 	componentDidMount() {}
 
-	// onSearchChange = (event) => {
-	// 	this.setState({
-	// 		searchfield: event.target.value
-	// 	});
-	// };
+	onSearchChange = (event) => {
+		this.setState({
+			searchField: event.target.value
+		});
+	};
 
 	render() {
 		const { restaurants } = this.state;
