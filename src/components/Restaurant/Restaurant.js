@@ -24,7 +24,7 @@ const Restaurant = (props) => {
 	};
 
 	return (
-		<div className="flex">
+		<div className="flex max-w">
 			<div className="width-prop">
 				<img
 					className="pa0 ma0 bn"
@@ -33,8 +33,8 @@ const Restaurant = (props) => {
 				/>
 			</div>
 			<ul className="text flex list flex-column ma0 pa0">
-				<p className="pa0 ma0 fw-b">{props.name}</p>
-				<ul className="text flex list ma0 pa0">
+				<p className="pa0 ma0 fw-b name-font-sty">{props.name}</p>
+				<ul className="flex list ma0 pa0">
 					<p className={fontStyle}>{props.visitedBy}</p>
 					<ul className="flex flex-row list pa0 ma0 bn">
 						{burgers(props.count)}
