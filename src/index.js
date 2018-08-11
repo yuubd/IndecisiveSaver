@@ -1,19 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
-import { searchPlaces } from './reducers';
+import { searchPlaces, requestRestaurants } from './reducers';
 import 'tachyons';
 
 const logger = createLogger();
 
+const rootReducer = combineReducers({ searchPlaces, requestRestaurants });
 // usually because there are many reducers the parameter should be rootReducer
 // middleware goes as the second parameter
-const store = createStore(searchPlaces, applyMiddleware(logger));
+// redux is not async. thunkMiddleware makes handle asyn actions like ajax calls
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 ReactDOM.render(
 	// provider makes the props to be accessed from top to bottom components
