@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Navigation from '../components/Navigation/Navigation';
 import PlaceList from '../components/PlaceList/PlaceList';
 import SearchBox from '../components/SearchBox/SearchBox';
-//import { restaurants } from '../components/Restaurant/restaurants';
 import Scroll from '../components/Scroll/Scroll';
 import './App.css';
 import { setSearchField, requestRestaurants } from '../actions';
@@ -54,8 +53,8 @@ class App extends Component {
 	};
 
 	render() {
-		// const { restaurants } = this.state;
 		const { searchField, onSearchChange, restaurants, isPending } = this.props;
+
 		const filteredrestaurants = restaurants.filter((restaurants) => {
 			return restaurants.name.toLowerCase().includes(searchField.toLowerCase());
 		});

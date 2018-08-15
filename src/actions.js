@@ -12,13 +12,15 @@ export const setSearchField = (text) => ({
 	payload: text
 });
 
-//
 export const requestRestaurants = () => (dispatch) => {
 	// dispatch({ type: REQUEST_RESTAURANTS_PENDING });
-	// fetch(restaurants)
-	// 	//.then((response) => response.json())
-	// 	.then((data) => dispatch({ type: REQUEST_RESTAURANTS_SUCCESS, payload: data }))
+	// fetch('./components/Restaurant/restaurants.json')
+	// 	.then((response) => response.json())
+	// 	.then((data) => {
+	// 		dispatch({ type: REQUEST_RESTAURANTS_SUCCESS, payload: data });
+	// 	})
 	// 	.catch((error) => dispatch({ type: REQUEST_RESTAURANTS_FAILED, payload: error }));
+
 	dispatch({ type: REQUEST_RESTAURANTS_PENDING });
 	dispatch({ type: REQUEST_RESTAURANTS_SUCCESS, payload: restaurants });
 };
