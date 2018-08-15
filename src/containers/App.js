@@ -59,15 +59,19 @@ class App extends Component {
 			return restaurants.name.toLowerCase().includes(searchField.toLowerCase());
 		});
 
-		return isPending ? (
-			<h1>Loading </h1>
-		) : (
-			<div className="pa0 ma0 width-middle">
+		return (
+			<div>
 				<Navigation />
-				<SearchBox searchChange={onSearchChange} />
-				<Scroll>
-					<PlaceList restaurants={filteredrestaurants} />
-				</Scroll>
+				{isPending ? (
+					<h1> Loading </h1>
+				) : (
+					<div className="pa0 ma0 width-middle">
+						<SearchBox searchChange={onSearchChange} />
+						<Scroll>
+							<PlaceList restaurants={filteredrestaurants} />
+						</Scroll>
+					</div>
+				)}
 			</div>
 		);
 	}
