@@ -13,6 +13,7 @@ const PlaceList = ({ restaurants }) => {
 				location={restaurants[i].location}
 				amount={restaurants[i].amount}
 				fullness={restaurants[i].fullnessfullness}
+				description={restaurants[i].description}
 			/>
 		);
 	});

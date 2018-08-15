@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"name": "Uncle Fatih's Pizza",
-		"imageURL": "./public/uncle_fatih's_pizza.jpg",
+		"imageURL": "./public/guu.png",
 		"visited_by": "David Kim",
 		"count": 3,
 		"location": "UBC",
@@ -32,7 +32,7 @@
 	{
 		"id": 4,
 		"name": "Nori",
-		"imageURL": "./public/nori.jpg",
+		"imageURL": "./public/dessert.png",
 		"visited_by": "Choi Rin",
 		"count": 2,
 		"location": "UBC",
