@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation/Navigation';
 import PlaceList from '../components/PlaceList/PlaceList';
 import SearchBox from '../components/SearchBox/SearchBox';
 import Scroll from '../components/Scroll/Scroll';
+import SignIn from '../components/SignIn/SignIn';
 import './App.css';
 import { setSearchField, requestRestaurants } from '../actions';
 
@@ -27,12 +28,18 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class App extends Component {
-	// constructor() {
-	// 	super();
-	// 	this.state = {
-	// 		restaurants: []
-	// 	};
-	// }
+	constructor() {
+		super();
+		this.state = {
+			route: 'signIn'
+		};
+	}
+
+	onRouteChange = (routeTo) => {
+		this.setState({
+			route: routeTo
+		});
+	};
 
 	componentDidMount() {
 		// fetch('https://jsonplaceholer.typicode.com/users')
@@ -61,9 +68,9 @@ class App extends Component {
 
 		return (
 			<div>
-				<Navigation />
-				{isPending ? (
-					<h1> Loading </h1>
+				<Navigation onRouteChange={this.onRouteChange} />
+				{this.state.route === 'signIn' ? (
+					<SignIn onRouteChange={this.onRouteChange} />
 				) : (
 					<div className="pa0 ma0 width-middle">
 						<SearchBox searchChange={onSearchChange} />
