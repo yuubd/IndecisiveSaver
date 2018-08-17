@@ -1,13 +1,13 @@
 import React from 'react';
 
-const SignIn = (props) => {
+const SignIn = ({ onRouteChange }) => {
 	return (
 		<main className="pa4 black-80">
 			<form className="measure center">
 				<fieldset id="sign_up" className="ba b--transparent ph0 mh0">
 					<legend className="f4 fw6 ph0 mh0">Sign In</legend>
 					<div className="mt3">
-						<label className="db fw6 lh-copy f6" for="email-address">
+						<label className="db fw6 lh-copy f6" htmlFor="email-address">
 							Email
 						</label>
 						<input
@@ -18,7 +18,7 @@ const SignIn = (props) => {
 						/>
 					</div>
 					<div className="mv3">
-						<label className="db fw6 lh-copy f6" for="password">
+						<label className="db fw6 lh-copy f6" htmlFor="password">
 							Password
 						</label>
 						<input
@@ -34,14 +34,18 @@ const SignIn = (props) => {
 				</fieldset>
 				<div className="">
 					<input
-						onClick={() => props.onRouteChange('home')}
+						onClick={() => onRouteChange('home')}
 						className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
 						type="submit"
 						value="Sign in"
 					/>
 				</div>
 				<div className="lh-copy mt3">
-					<a href="#0" className="f6 link dim black db">
+					<a
+						onClick={() => onRouteChange('signUp')}
+						href="#0"
+						className="f6 link dim black db"
+					>
 						Sign up
 					</a>
 					<a href="#0" className="f6 link dim black db">

@@ -2,7 +2,8 @@ import {
 	CHANGE_SEARCH_FIELD,
 	REQUEST_RESTAURANTS_PENDING,
 	REQUEST_RESTAURANTS_SUCCESS,
-	REQUEST_RESTAURANTS_FAILED
+	REQUEST_RESTAURANTS_FAILED,
+	CHANGE_ROUTE
 } from './constants.js';
 import { restaurants } from './components/Restaurant/restaurants';
 // this is filetering placelist action
@@ -24,3 +25,8 @@ export const requestRestaurants = () => (dispatch) => {
 	dispatch({ type: REQUEST_RESTAURANTS_PENDING });
 	dispatch({ type: REQUEST_RESTAURANTS_SUCCESS, payload: restaurants });
 };
+
+export const changeRoute = (routeTo) => ({
+	type: CHANGE_ROUTE,
+	payload: routeTo
+});

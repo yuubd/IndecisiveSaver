@@ -7,12 +7,12 @@ import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
-import { searchPlaces, requestRestaurants } from './reducers';
+import { searchPlaces, requestRestaurants, changeRoute } from './reducers';
 import 'tachyons';
 
 const logger = createLogger();
 
-const rootReducer = combineReducers({ searchPlaces, requestRestaurants });
+const rootReducer = combineReducers({ searchPlaces, requestRestaurants, changeRoute });
 // usually because there are many reducers the parameter should be rootReducer
 // middleware goes as the second parameter
 // redux is not async. thunkMiddleware makes handle asyn actions like ajax calls

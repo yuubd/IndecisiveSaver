@@ -5,8 +5,9 @@ import PlaceList from '../components/PlaceList/PlaceList';
 import SearchBox from '../components/SearchBox/SearchBox';
 import Scroll from '../components/Scroll/Scroll';
 import SignIn from '../components/SignIn/SignIn';
+import SignUp from '../components/SignUp/SignUp';
 import './App.css';
-import { setSearchField, requestRestaurants } from '../actions';
+import { setSearchField, requestRestaurants, changeRoute } from '../actions';
 
 // this can replace searchField in the state
 const mapStateToProps = (state) => {
@@ -14,7 +15,8 @@ const mapStateToProps = (state) => {
 		searchField: state.searchPlaces.searchField,
 		restaurants: state.requestRestaurants.restaurants,
 		pending: state.requestRestaurants.isPending,
-		error: state.requestRestaurants.error
+		error: state.requestRestaurants.error,
+		route: state.changeRoute.route
 	};
 };
 
@@ -23,44 +25,31 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-		onRequestRestaurants: () => dispatch(requestRestaurants())
+		onRequestRestaurants: () => dispatch(requestRestaurants()),
+		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo))
 	};
 };
 
 class App extends Component {
-	constructor() {
-		super();
-		this.state = {
-			route: 'signIn'
-		};
-	}
-
-	onRouteChange = (routeTo) => {
-		this.setState({
-			route: routeTo
-		});
-	};
-
 	componentDidMount() {
-		// fetch('https://jsonplaceholer.typicode.com/users')
-		// 	.then((response) => response.json())
-		// 	.then((places) => {
-		// 		this.setState({ restaurants: places });
-		// 	});
-		// this.setState({
-		// 	restaurants: restaurants
-		// });
 		this.props.onRequestRestaurants();
 	}
 
-	onSearchChange = (event) => {
-		this.setState({
-			searchField: event.target.value
-		});
-	};
+	// onSearchChange = (event) => {
+	// 	this.setState({
+	// 		searchField: event.target.value
+	// 	});
+	// };
 
 	render() {
-		const { searchField, onSearchChange, restaurants, isPending } = this.props;
+		const {
+			searchField,
+			onSearchChange,
+			onRouteChange,
+			restaurants,
+			isPending,
+			route
+		} = this.props;
 
 		const filteredrestaurants = restaurants.filter((restaurants) => {
 			return restaurants.name.toLowerCase().includes(searchField.toLowerCase());
@@ -68,9 +57,11 @@ class App extends Component {
 
 		return (
 			<div>
-				<Navigation onRouteChange={this.onRouteChange} />
-				{this.state.route === 'signIn' ? (
-					<SignIn onRouteChange={this.onRouteChange} />
+				<Navigation onRouteChange={onRouteChange} displayMenu={route} />
+				{route === 'signIn' ? (
+					<SignIn onRouteChange={onRouteChange} />
+				) : route === 'signUp' ? (
+					<SignUp onRouteChange={onRouteChange} />
 				) : (
 					<div className="pa0 ma0 width-middle">
 						<SearchBox searchChange={onSearchChange} />

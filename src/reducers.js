@@ -2,16 +2,18 @@ import {
 	CHANGE_SEARCH_FIELD,
 	REQUEST_RESTAURANTS_PENDING,
 	REQUEST_RESTAURANTS_SUCCESS,
-	REQUEST_RESTAURANTS_FAILED
+	REQUEST_RESTAURANTS_FAILED,
+	CHANGE_ROUTE
 } from './constants.js';
 
 const initialStateSearch = {
 	searchField: ''
 };
 
-// searchRobots should be a true function
-// return an output does not modify anything some input, same output
-// setting default parameter prevent errors when empty parameters passed
+/** searchRobots should be a true function
+* return an output does not modify anything some input, same output
+* setting default parameter prevent errors when empty parameters passed
+*/
 export const searchPlaces = (state = initialStateSearch, action = {}) => {
 	switch (action.type) {
 		case CHANGE_SEARCH_FIELD:
@@ -42,6 +44,18 @@ export const requestRestaurants = (state = initialStateRestaurants, action = {})
 				error: action.payload,
 				isPending: false
 			});
+		default:
+			return state;
+	}
+};
+
+const initialRoute = {
+	route: 'signIn'
+};
+export const changeRoute = (state = initialRoute, action = {}) => {
+	switch (action.type) {
+		case CHANGE_ROUTE:
+			return Object.assign({}, state, { route: action.payload });
 		default:
 			return state;
 	}
