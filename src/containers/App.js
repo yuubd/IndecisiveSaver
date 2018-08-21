@@ -74,6 +74,7 @@ class App extends Component {
 		);
 	}
 }
+
 /**
  * connect() is a higher order function: return another function
  * app knows there is redux store and interested in changes
