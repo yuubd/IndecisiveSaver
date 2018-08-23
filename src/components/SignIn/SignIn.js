@@ -15,7 +15,27 @@ class SignIn extends React.Component {
 		this.setState({ signinPassword: event.target.value });
 	};
 	onSubmitSignIn = () => {
-		this.props.onRouteChange('home');
+		fetch('http://localhost:3001/signin', {
+			method: 'post',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				email: this.state.signInEmail,
+				password: this.state.signinPassword
+			})
+		})
+			.then((res) => {
+				res.json();
+			})
+			.then((data) => {
+				console.log(data);
+				// the data is user
+				if (data) {
+					console.log('user!!!');
+					console.log(data);
+					//this.props.onRouteChange('home');
+				}
+				console.log('no user!!!');
+			});
 	};
 	render() {
 		const { onRouteChange } = this.props;
@@ -77,6 +97,5 @@ class SignIn extends React.Component {
 		);
 	}
 }
-({ onRouteChange }) => {};
 
 export default SignIn;
