@@ -31,10 +31,32 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class App extends Component {
+	constructor() {
+		super();
+		this.state = {
+			user: {
+				id: '',
+				name: '',
+				email: '',
+				entries: 0,
+				joined: ''
+			}
+		};
+	}
 	componentDidMount() {
 		this.props.onRequestRestaurants();
 	}
-
+	loadUserProfile = (user) => {
+		this.setState({
+			user: {
+				id: user.id,
+				name: user.name,
+				email: user.email,
+				entries: user.entries,
+				joined: user.joined
+			}
+		});
+	};
 	// onSearchChange = (event) => {
 	// 	this.setState({
 	// 		searchField: event.target.value
@@ -61,7 +83,10 @@ class App extends Component {
 				{route === 'signIn' ? (
 					<SignIn onRouteChange={onRouteChange} />
 				) : route === 'signUp' ? (
-					<SignUp onRouteChange={onRouteChange} />
+					<SignUp
+						onRouteChange={onRouteChange}
+						loadUserProfile={this.loadUserProfile}
+					/>
 				) : (
 					<div className="pa0 ma0 width-middle">
 						<SearchBox searchChange={onSearchChange} />
