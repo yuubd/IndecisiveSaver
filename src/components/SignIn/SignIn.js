@@ -11,7 +11,9 @@ class SignIn extends React.Component {
 	onEmailChange = (event) => {
 		this.setState({ signInEmail: event.target.value });
 	};
-
+	onPasswordChange = (event) => {
+		this.setState({ signinPassword: event.target.value });
+	};
 	onSubmitSignIn = () => {
 		fetch('http://localhost:3001/signin', {
 			method: 'post',
