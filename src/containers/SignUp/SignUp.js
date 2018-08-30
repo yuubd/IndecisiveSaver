@@ -34,7 +34,7 @@ class SignUp extends React.Component {
 			.then((data) => {
 				// data is user created from signUp
 				if (data) {
-					this.props.loadUserProfile(data);
+					//this.props.loadUserProfile(data);
 					this.props.onRouteChange('home');
 				}
 			});

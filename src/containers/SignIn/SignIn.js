@@ -19,8 +19,6 @@ const mapDispatchToProps = (dispatch) => {
 class SignIn extends React.Component {
 	onSubmitSignIn = () => {
 		const { signInEmail, signInPassword } = this.props;
-		console.log(signInEmail);
-		console.log(signInPassword);
 		fetch('http://localhost:3001/signin', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
@@ -35,9 +33,7 @@ class SignIn extends React.Component {
 			.then((data) => {
 				// the data is user
 				if (data.id) {
-					console.log('go home');
 					this.props.onRouteChange('home');
-					console.log('went home');
 				}
 			})
 			.catch((err) => console.log('no user exists'));
