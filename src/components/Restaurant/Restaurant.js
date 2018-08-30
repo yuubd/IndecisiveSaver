@@ -31,7 +31,10 @@ const Restaurant = (props) => {
 	const fontStyle = 'fw1 pa0 pl2 ma0 gray';
 
 	return (
-		<article className="mw9 center bg-white br3 pa1 pa4-ns mv1 ba b--black-10">
+		<article
+			onClick={props.onClickChangeRoute}
+			className="mw9 center bg-white br3 pa1 pa4-ns mv1 ba b--black-10"
+		>
 			<div className="flex max-w">
 				<div className="width-prop">
 					<img
