@@ -3,15 +3,13 @@ import {
 	REQUEST_RESTAURANTS_PENDING,
 	REQUEST_RESTAURANTS_SUCCESS,
 	REQUEST_RESTAURANTS_FAILED,
-	CHANGE_ROUTE,
-	POST_SIGNINFO_NAME,
-	POST_SIGNINFO_PASSWORD,
-	POST_SIGNINFO_EMAIL
+	CHANGE_ROUTE
 } from './constants.js';
 
 const initialStateSearch = {
 	searchField: ''
 };
+
 /** searchRobots should be a true function
 * return an output does not modify anything some input, same output
 * setting default parameter prevent errors when empty parameters passed
@@ -52,36 +50,12 @@ export const requestRestaurants = (state = initialStateRestaurants, action = {})
 };
 
 const initialRoute = {
-	route: ''
+	route: 'signIn'
 };
 export const changeRoute = (state = initialRoute, action = {}) => {
 	switch (action.type) {
 		case CHANGE_ROUTE:
 			return Object.assign({}, state, { route: action.payload });
-		default:
-			return state;
-	}
-};
-
-const initialSignInfo = {
-	email: '',
-	password: '',
-	name: ''
-};
-export const postSignInfo = (state = initialSignInfo, action = {}) => {
-	switch (action.type) {
-		case POST_SIGNINFO_EMAIL:
-			return Object.assign({}, state, {
-				email: action.payload
-			});
-		case POST_SIGNINFO_PASSWORD:
-			return Object.assign({}, state, {
-				password: action.payload
-			});
-		case POST_SIGNINFO_NAME:
-			return Object.assign({}, state, {
-				name: action.payload
-			});
 		default:
 			return state;
 	}
