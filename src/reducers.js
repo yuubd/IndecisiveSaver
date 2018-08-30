@@ -52,7 +52,7 @@ export const requestRestaurants = (state = initialStateRestaurants, action = {})
 };
 
 const initialRoute = {
-	route: 'signIn'
+	route: ''
 };
 export const changeRoute = (state = initialRoute, action = {}) => {
 	switch (action.type) {
