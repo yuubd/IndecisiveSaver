@@ -98,6 +98,8 @@ class App extends Component {
 		return (
 			<div>
 				{navigation}
+				{navigation}
+
 				{route === 'home' ? placeList : route === 'signUp' ? signUp : signIn}
 			</div>
 		);
