@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Navigation from '../components/Navigation/Navigation';
-import PlaceList from '../components/PlaceList/PlaceList';
-import SearchBox from '../components/SearchBox/SearchBox';
-import Scroll from '../components/Scroll/Scroll';
-import SignIn from '../components/SignIn/SignIn';
-import SignUp from '../components/SignUp/SignUp';
+import Navigation from '../../components/Navigation/Navigation';
+import PlaceList from '../../components/PlaceList/PlaceList';
+import SearchBox from '../../components/SearchBox/SearchBox';
+import Scroll from '../../components/Scroll/Scroll';
+import SignIn from '../SignIn/SignIn';
+import SignUp from '../SignUp/SignUp';
 import './App.css';
-import { setSearchField, requestRestaurants, changeRoute } from '../actions';
+import { setSearchField, requestRestaurants, changeRoute } from '../../actions';
 
 // this can replace searchField in the state
 const mapStateToProps = (state) => {
@@ -31,10 +31,32 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class App extends Component {
+	constructor() {
+		super();
+		this.state = {
+			user: {
+				id: '',
+				name: '',
+				email: '',
+				entries: 0,
+				joined: ''
+			}
+		};
+	}
 	componentDidMount() {
 		this.props.onRequestRestaurants();
 	}
-
+	loadUserProfile = (user) => {
+		this.setState({
+			user: {
+				id: user.id,
+				name: user.name,
+				email: user.email,
+				entries: user.entries,
+				joined: user.joined
+			}
+		});
+	};
 	// onSearchChange = (event) => {
 	// 	this.setState({
 	// 		searchField: event.target.value
@@ -54,26 +76,34 @@ class App extends Component {
 		const filteredrestaurants = restaurants.filter((restaurants) => {
 			return restaurants.name.toLowerCase().includes(searchField.toLowerCase());
 		});
+		const navigation = (
+			<Navigation onRouteChange={onRouteChange} displayMenu={route} />
+		);
+		const signIn = <SignIn onRouteChange={onRouteChange} />;
+		const signUp = (
+			<SignUp
+				onRouteChange={onRouteChange}
+				loadUserProfile={this.loadUserProfile}
+			/>
+		);
+		const placeList = (
+			<div className="pa0 ma0 width-middle">
+				<SearchBox searchChange={onSearchChange} />
+				<Scroll>
+					<PlaceList restaurants={filteredrestaurants} />
+				</Scroll>
+			</div>
+		);
 
 		return (
 			<div>
-				<Navigation onRouteChange={onRouteChange} displayMenu={route} />
-				{route === 'signIn' ? (
-					<SignIn onRouteChange={onRouteChange} />
-				) : route === 'signUp' ? (
-					<SignUp onRouteChange={onRouteChange} />
-				) : (
-					<div className="pa0 ma0 width-middle">
-						<SearchBox searchChange={onSearchChange} />
-						<Scroll>
-							<PlaceList restaurants={filteredrestaurants} />
-						</Scroll>
-					</div>
-				)}
+				{navigation}
+				{route === 'home' ? placeList : route === 'signUp' ? signUp : signIn}
 			</div>
 		);
 	}
 }
+
 /**
  * connect() is a higher order function: return another function
  * app knows there is redux store and interested in changes
