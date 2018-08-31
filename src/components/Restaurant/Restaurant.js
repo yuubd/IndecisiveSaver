@@ -38,12 +38,12 @@ const Restaurant = (props) => {
 			<div className="flex max-w">
 				<div className="width-prop">
 					<img
-						className="pa0 ma0 bn br"
+						className="pa0 ma0 bn br2"
 						src={require(`${props.imageURL}`)}
 						alt={props.imageURL}
 					/>
 				</div>
-				<ul className="text flex list flex-column ma0 pa0">
+				<ul className="text flex list flex-column ma0 pa0 dark-gray">
 					<p className="pa0 ma0 pl2 fw-b name-font-sty">{props.name}</p>
 					<ul className="flex list ma0 pa0">
 						<p className={fontStyle}>{props.visitedBy}</p>

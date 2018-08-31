@@ -1,5 +1,6 @@
 import React from 'react';
 import Restaurant from '../Restaurant/Restaurant';
+import RestaurantDetail from '../RestaurantDetail/RestaurantDetail.js';
 class PlaceList extends React.Component {
 	constructor(props) {
 		super(props);
@@ -7,17 +8,32 @@ class PlaceList extends React.Component {
 			route: 'list'
 		};
 	}
-	onClickChangeRoute = (i) => {
+	onClickChangeRoute = (route) => {
 		this.setState({
-			route: `${this.props.restaurants[i]}`
+			route: route
 		});
-		console.log(this.state.route);
 	};
 	restauantComponent = this.props.restaurants.map((restaurant, i) => {
-		const { restaurants } = this.props;
 		return (
 			<Restaurant
 				onClickChangeRoute={() => this.onClickChangeRoute(i)}
+				key={restaurant.id}
+				name={restaurant.name}
+				imageURL={restaurant.imageURL}
+				visitedBy={restaurant.visited_by}
+				count={restaurant.count}
+				location={restaurant.location}
+				amount={restaurant.amount}
+				fullness={restaurant.fullnessfullness}
+				description={restaurant.description}
+			/>
+		);
+	});
+	restaurantDetail = (i) => {
+		const { restaurants } = this.props;
+		return (
+			<RestaurantDetail
+				onClickChangeRoute={() => this.onClickChangeRoute('list')}
 				key={restaurants[i].id}
 				name={restaurants[i].name}
 				imageURL={restaurants[i].imageURL}
@@ -29,14 +45,16 @@ class PlaceList extends React.Component {
 				description={restaurants[i].description}
 			/>
 		);
-	});
+	};
+
 	render() {
+		const { route } = this.state;
 		return (
 			<ul className="pl0 pa0 ma0 flex flex-column justify-start list">
-				{this.state.route === 'list' ? (
+				{route === 'list' ? (
 					this.restauantComponent
 				) : (
-					<p>{this.state.route}</p>
+					this.restaurantDetail(route)
 				)}
 			</ul>
 		);
