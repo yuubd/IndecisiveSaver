@@ -31,6 +31,9 @@ const RestaurantDetail = (props) => {
 			<article className="br2 dark-gray b--black-10 w-100 w-100-m w-25-l center">
 				<div className="dtc">
 					<h1 className="f-4 f4-ns mv0 dark-gray">{props.name}</h1>
+					<p className="f-2 lh-copy measure ma0 ml1 mid-gray">
+						at {props.location}
+					</p>
 				</div>
 				<img
 					src={require(`${props.imageURL}`)}
