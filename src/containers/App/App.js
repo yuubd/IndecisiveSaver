@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../../components/Navigation/Navigation';
-import PlaceList from '../../components/PlaceList/PlaceList';
+import PlaceList from '../PlaceList/PlaceList';
+import RestaurantDetail from '../../components/RestaurantDetail/RestaurantDetail.js';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Scroll from '../../components/Scroll/Scroll';
 import SignIn from '../SignIn/SignIn';
@@ -94,11 +95,36 @@ class App extends Component {
 				</Scroll>
 			</div>
 		);
+		const restaurantDetail = (i) => {
+			const { restaurants, onRouteChange } = this.props;
+			return (
+				<RestaurantDetail
+					onClickChangeRoute={() => onRouteChange('home')}
+					key={restaurants[i].id}
+					name={restaurants[i].name}
+					imageURL={restaurants[i].imageURL}
+					visitedBy={restaurants[i].visited_by}
+					count={restaurants[i].count}
+					location={restaurants[i].location}
+					amount={restaurants[i].amount}
+					fullness={restaurants[i].fullnessfullness}
+					description={restaurants[i].description}
+				/>
+			);
+		};
 
 		return (
 			<div>
 				{navigation}
-				{route === 'home' ? placeList : route === 'signUp' ? signUp : signIn}
+				{route === 'home' ? (
+					placeList
+				) : route === 'signUp' ? (
+					signUp
+				) : typeof route === 'number' ? (
+					restaurantDetail(route)
+				) : (
+					signIn
+				)}
 			</div>
 		);
 	}
