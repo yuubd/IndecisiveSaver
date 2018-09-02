@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../../components/Navigation/Navigation';
+import Footer from '../../components/Footer/Footer';
 import PlaceList from '../PlaceList/PlaceList';
 import RestaurantDetail from '../../components/RestaurantDetail/RestaurantDetail.js';
 import SearchBox from '../../components/SearchBox/SearchBox';
@@ -77,9 +78,7 @@ class App extends Component {
 		const filteredrestaurants = restaurants.filter((restaurants) => {
 			return restaurants.name.toLowerCase().includes(searchField.toLowerCase());
 		});
-		const navigation = (
-			<Navigation onRouteChange={onRouteChange} displayMenu={route} />
-		);
+
 		const signIn = <SignIn onRouteChange={onRouteChange} />;
 		const signUp = (
 			<SignUp
@@ -90,9 +89,7 @@ class App extends Component {
 		const placeList = (
 			<div className="pa0 ma0 width-middle">
 				<SearchBox searchChange={onSearchChange} />
-				<Scroll>
-					<PlaceList restaurants={filteredrestaurants} />
-				</Scroll>
+				<PlaceList restaurants={filteredrestaurants} />
 			</div>
 		);
 		const restaurantDetail = (i) => {
@@ -115,16 +112,19 @@ class App extends Component {
 
 		return (
 			<div>
-				{navigation}
-				{route === 'home' ? (
-					placeList
-				) : route === 'signUp' ? (
-					signUp
-				) : typeof route === 'number' ? (
-					restaurantDetail(route)
-				) : (
-					signIn
-				)}
+				<Navigation onRouteChange={onRouteChange} displayMenu={route} />
+				<Scroll>
+					{route === 'home' ? (
+						placeList
+					) : route === 'signUp' ? (
+						signUp
+					) : typeof route === 'number' ? (
+						restaurantDetail(route)
+					) : (
+						signIn
+					)}
+				</Scroll>
+				<Footer route={route} />
 			</div>
 		);
 	}
