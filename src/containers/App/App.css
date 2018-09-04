@@ -11,7 +11,8 @@
 		transform: rotate(360deg);
 	}
 }
-.width-middle {
+.width-middle,
+.maxWidth {
 	max-width: 500px;
 }
 

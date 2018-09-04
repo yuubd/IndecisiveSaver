@@ -111,7 +111,7 @@ class App extends Component {
 		};
 
 		return (
-			<div>
+			<div className="maxWidth">
 				<Navigation onRouteChange={onRouteChange} displayMenu={route} />
 				<Scroll>
 					{route === 'home' ? (
