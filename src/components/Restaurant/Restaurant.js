@@ -6,7 +6,7 @@ const Restaurant = (props) => {
 	const makeBurger = (id) => {
 		return (
 			<li key={id}>
-				<img className="pa0 ma0 bn mw1" src={hamburger} alt="ham" />
+				<img className="bn burger-sty" src={hamburger} alt="ham" />
 			</li>
 		);
 	};
@@ -33,9 +33,9 @@ const Restaurant = (props) => {
 	return (
 		<article
 			onClick={props.onClickChangeRoute}
-			className="mw9 center bg-white br3 pa1 pa4-ns mv1 ba b--black-10"
+			className="mw9 center bg-white br3 mv1 ba b--black-10"
 		>
-			<div className="flex max-w">
+			<div className="flex">
 				<div className="width-prop">
 					<img
 						className="pa0 ma0 bn br2"
@@ -47,7 +47,7 @@ const Restaurant = (props) => {
 					<p className="pa0 ma0 pl2 fw-b name-font-sty">{props.name}</p>
 					<ul className="flex list ma0 pa0">
 						<p className={fontStyle}>{props.visitedBy}</p>
-						<ul className="flex flex-row list pa0 ma0 bn">
+						<ul className="flex flex-row list pa0 ma0 bn ">
 							{burgers(props.count)}
 						</ul>
 					</ul>

@@ -3,27 +3,38 @@
 	width: 40.0%;
 }
 
-@media screen and (min-width: 10px) {
-	.width-prop {
-		width: 40.0%;
-	}
-}
-
 .text {
 	font-size: 4vw;
 	width: 60%;
 	max-width: 300px;
 }
-@media screen and (min-width: 510px) {
+@media screen and (min-width: 500px) {
 	.text {
-		font-size: 3.5vw;
+		font-size: 20px;
 	}
-}
-
-.max-w {
-	max-width: 500px;
 }
 
 .name-font-sty {
 	font-size: 5vw;
+}
+@media screen and (min-width: 500px) {
+	.name-font-sty {
+		font-size: 25px;
+	}
+}
+.burger-sty {
+	max-height: 20px;
+	margin-top: -2px;
+}
+@media screen and (min-width: 430px) {
+	.burger-sty {
+		max-height: 20px;
+		margin-top: -1px;
+	}
+}
+@media screen and (min-width: 499px) {
+	.burger-sty {
+		max-height: 20px;
+		margin-top: 0px;
+	}
 }
