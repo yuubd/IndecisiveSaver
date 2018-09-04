@@ -1,7 +1,9 @@
 .scroll {
 	overflow: scroll;
-	height: calc(100% - 101px);
+	height: calc(100% - 112px);
 	position: fixed;
+	width: 100%;
+	max-width: 500px;
 }
 ::-webkit-scrollbar {
 	display: none;
