@@ -18,6 +18,7 @@ const rootReducer = combineReducers({
 	changeRoute,
 	postSignInfo
 });
+
 // usually because there are many reducers the parameter should be rootReducer
 // middleware goes as the second parameter
 // redux is not async. thunkMiddleware makes handle asyn actions like ajax calls

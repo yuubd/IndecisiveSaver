@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch) => {
 class SignUp extends React.Component {
 	onSubmitSignUp = () => {
 		const { signUpEmail, signUpPassword, signUpName } = this.props;
+		if (!(signUpEmail.length && signUpPassword.length && signUpName.length)) {
+			return;
+		}
 		fetch('http://localhost:3001/signup', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
@@ -55,8 +58,8 @@ class SignUp extends React.Component {
 								onChange={onEmailChange}
 								className="pa2 input-reset ba bg-transparent w-100 measure"
 								type="email"
-								name="email-address"
 								id="email-address"
+								required
 							/>
 						</div>
 						<div className="mt3">
@@ -65,10 +68,10 @@ class SignUp extends React.Component {
 							</label>
 							<input
 								onChange={onNameChange}
-								className="pa2 input-reset ba bg-transparent w-95 measure"
-								type="name"
-								name="name"
+								className="pa2 input-reset ba bg-transparent w-100 measure"
+								type="text"
 								id="name"
+								required
 							/>
 						</div>
 						<div className="mt3">
@@ -77,17 +80,17 @@ class SignUp extends React.Component {
 							</label>
 							<input
 								onChange={onPasswordChange}
-								className="b pa2 input-reset ba bg-transparent"
+								className="b pa2 input-reset ba bg-transparent w-100"
 								type="password"
-								name="password"
 								id="password"
+								required
 							/>
 						</div>
 					</fieldset>
 					<div className="mt3 flex">
 						<input
 							onClick={this.onSubmitSignUp}
-							className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6"
+							className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 w-100"
 							type="submit"
 							value="Sign Up"
 						/>

@@ -30,9 +30,8 @@ class SignIn extends React.Component {
 			.then((response) => {
 				return response.json();
 			})
-			.then((data) => {
-				// the data is user
-				if (data.id) {
+			.then((user) => {
+				if (user.id.length > 0) {
 					this.props.onRouteChange('home');
 				}
 			})
@@ -51,10 +50,8 @@ class SignIn extends React.Component {
 								Email
 							</label>
 							<input
-								className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+								className="pa2 input-reset ba bg-transparent w-100"
 								type="email"
-								name="email-address"
-								id="email-address"
 								onChange={onEmailChange}
 							/>
 						</div>
@@ -63,21 +60,16 @@ class SignIn extends React.Component {
 								Password
 							</label>
 							<input
-								className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+								className="b pa2 input-reset ba bg-transparent w-100"
 								type="password"
-								name="password"
-								id="password"
 								onChange={onPasswordChange}
 							/>
 						</div>
-						<label className="pa0 ma0 lh-copy f6 pointer">
-							<input type="checkbox" /> Remember me
-						</label>
 					</fieldset>
 					<div className="">
 						<input
 							onClick={this.onSubmitSignIn}
-							className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+							className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100"
 							type="submit"
 							value="Sign in"
 						/>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../../components/Navigation/Navigation';
-import Footer from '../../components/Footer/Footer';
 import PlaceList from '../PlaceList/PlaceList';
 import RestaurantDetail from '../../components/RestaurantDetail/RestaurantDetail.js';
 import SearchBox from '../../components/SearchBox/SearchBox';
@@ -31,6 +30,8 @@ const mapDispatchToProps = (dispatch) => {
 		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo))
 	};
 };
+
+const ff_a = { fontFamily: 'Avenir' };
 
 class App extends Component {
 	constructor() {
@@ -80,18 +81,21 @@ class App extends Component {
 		});
 
 		const signIn = <SignIn onRouteChange={onRouteChange} />;
+
 		const signUp = (
 			<SignUp
 				onRouteChange={onRouteChange}
 				loadUserProfile={this.loadUserProfile}
 			/>
 		);
+
 		const placeList = (
 			<div className="pa0 ma0 width-middle">
 				<SearchBox searchChange={onSearchChange} />
 				<PlaceList restaurants={filteredrestaurants} />
 			</div>
 		);
+
 		const restaurantDetail = (i) => {
 			const { restaurants, onRouteChange } = this.props;
 			return (
@@ -111,7 +115,7 @@ class App extends Component {
 		};
 
 		return (
-			<div className="maxWidth">
+			<div className="maxWidth" style={ff_a}>
 				<Navigation onRouteChange={onRouteChange} displayMenu={route} />
 				<Scroll>
 					{route === 'home' ? (
@@ -124,7 +128,6 @@ class App extends Component {
 						signIn
 					)}
 				</Scroll>
-				<Footer route={route} />
 			</div>
 		);
 	}

@@ -35,7 +35,6 @@ class PlaceList extends React.Component {
 	});
 
 	render() {
-		const { route } = this.props;
 		return (
 			<ul className="pl0 pa0 ma0 flex flex-column justify-start list">
 				{this.restauantComponent}
