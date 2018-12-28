@@ -5,9 +5,9 @@ import {
 	postEmail,
 	signInRequest,
 	changeRoute,
-	changeRouteToHome
+	changeRouteToHome,
+	changeRouteToSignUp
 } from '../../actions';
-import { HOME, SIGNUP } from '../../constants';
 
 const mapStateToProps = (state) => {
 	return {
@@ -22,26 +22,23 @@ const mapDispatchToProps = (dispatch) => {
 		onPasswordChange: (event) => dispatch(postPassword(event.target.value)),
 		onSubmitSignIn: (email, password) => dispatch(signInRequest(email, password)),
 		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo)),
-		onRouteToHome: () => dispatch(changeRouteToHome())
+		onRouteToHome: () => dispatch(changeRouteToHome()),
+		onRouteToSignUp: () => dispatch(changeRouteToSignUp())
 	};
 };
 
 class SignIn extends React.Component {
-	onSubmitSignIn() {
+	onSubmit = () => {
 		const { onSubmitSignIn, signInEmail, signInPassword } = this.props;
 		onSubmitSignIn(signInEmail, signInPassword);
-	}
+	};
+
+	alertTooBadForNow = () => {
+		alert('TOO BAD FOR NOW :(');
+	};
 
 	render() {
-		const {
-			onRouteChange,
-			onRouteToHome,
-			onPasswordChange,
-			onEmailChange,
-			onSubmitSignIn,
-			signInEmail,
-			signInPassword
-		} = this.props;
+		const { onRouteToSignUp, onPasswordChange, onEmailChange } = this.props;
 
 		return (
 			<main className="pa4 black-80">
@@ -71,17 +68,21 @@ class SignIn extends React.Component {
 					</fieldset>
 					<div className="">
 						<input
-							onClick={onSubmitSignIn}
+							onClick={this.onSubmit}
 							className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100"
 							type="submit"
 							value="Sign in"
 						/>
 					</div>
 					<div className="lh-copy mt3">
-						<a onClick={onRouteToHome} href="#0" className="f6 link dim black db">
+						<a onClick={onRouteToSignUp} href="#0" className="f6 link dim black db">
 							Sign up
 						</a>
-						<a href="#0" className="f6 link dim black db">
+						<a
+							onClick={this.alertTooBadForNow}
+							href="#0"
+							className="f6 link dim black db"
+						>
 							Forgot your password?
 						</a>
 					</div>
