@@ -4,9 +4,11 @@ import {
 	REQUEST_RESTAURANTS_SUCCESS,
 	REQUEST_RESTAURANTS_FAILED,
 	CHANGE_ROUTE,
+	CHANGE_ROUTE_HOME,
 	POST_SIGNINFO_NAME,
 	POST_SIGNINFO_PASSWORD,
-	POST_SIGNINFO_EMAIL
+	POST_SIGNINFO_EMAIL,
+	HOME
 } from './constants.js';
 import { restaurants } from './components/Restaurant/restaurants';
 // this is filetering placelist action
@@ -34,6 +36,11 @@ export const changeRoute = (routeTo) => ({
 	payload: routeTo
 });
 
+export const changeRouteToHome = () => ({
+	type: CHANGE_ROUTE_HOME,
+	payload: HOME
+});
+
 export const postEmail = (email) => ({
 	type: POST_SIGNINFO_EMAIL,
 	payload: email
@@ -48,3 +55,26 @@ export const postName = (name) => ({
 	type: POST_SIGNINFO_NAME,
 	payload: name
 });
+
+export const signInRequest = (signInEmail, signInPassword) => (dispatch) => {
+	fetch('http://localhost:3001/signin', {
+		method: 'post',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			email: signInEmail,
+			password: signInPassword
+		})
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.then((user) => {
+			if (user.id.length > 0) {
+				return dispatch(changeRoute(HOME));
+			}
+		})
+		.catch((err) => {
+			alert('Account or password is incorrect');
+			console.log('SignIn error: ' + err);
+		});
+};

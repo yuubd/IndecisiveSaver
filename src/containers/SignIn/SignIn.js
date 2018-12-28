@@ -1,6 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { postPassword, postEmail } from '../../actions';
+import {
+	postPassword,
+	postEmail,
+	signInRequest,
+	changeRoute,
+	changeRouteToHome
+} from '../../actions';
+import { HOME, SIGNUP } from '../../constants';
 
 const mapStateToProps = (state) => {
 	return {
@@ -12,34 +19,30 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onEmailChange: (event) => dispatch(postEmail(event.target.value)),
-		onPasswordChange: (event) => dispatch(postPassword(event.target.value))
+		onPasswordChange: (event) => dispatch(postPassword(event.target.value)),
+		onSubmitSignIn: (email, password) => dispatch(signInRequest(email, password)),
+		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo)),
+		onRouteToHome: () => dispatch(changeRouteToHome())
 	};
 };
 
 class SignIn extends React.Component {
-	onSubmitSignIn = () => {
-		const { signInEmail, signInPassword } = this.props;
-		fetch('http://localhost:3001/signin', {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email: signInEmail,
-				password: signInPassword
-			})
-		})
-			.then((response) => {
-				return response.json();
-			})
-			.then((user) => {
-				if (user.id.length > 0) {
-					this.props.onRouteChange('home');
-				}
-			})
-			.catch((err) => console.log('no user exists'));
-	};
+	onSubmitSignIn() {
+		const { onSubmitSignIn, signInEmail, signInPassword } = this.props;
+		onSubmitSignIn(signInEmail, signInPassword);
+	}
 
 	render() {
-		const { onRouteChange, onPasswordChange, onEmailChange } = this.props;
+		const {
+			onRouteChange,
+			onRouteToHome,
+			onPasswordChange,
+			onEmailChange,
+			onSubmitSignIn,
+			signInEmail,
+			signInPassword
+		} = this.props;
+
 		return (
 			<main className="pa4 black-80">
 				<form className="measure center">
@@ -68,18 +71,14 @@ class SignIn extends React.Component {
 					</fieldset>
 					<div className="">
 						<input
-							onClick={this.onSubmitSignIn}
+							onClick={onSubmitSignIn}
 							className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100"
 							type="submit"
 							value="Sign in"
 						/>
 					</div>
 					<div className="lh-copy mt3">
-						<a
-							onClick={() => onRouteChange('signUp')}
-							href="#0"
-							className="f6 link dim black db"
-						>
+						<a onClick={onRouteToHome} href="#0" className="f6 link dim black db">
 							Sign up
 						</a>
 						<a href="#0" className="f6 link dim black db">

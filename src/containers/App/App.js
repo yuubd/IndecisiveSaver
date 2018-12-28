@@ -8,7 +8,8 @@ import Scroll from '../../components/Scroll/Scroll';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import './App.css';
-import { setSearchField, requestRestaurants, changeRoute } from '../../actions';
+import { setSearchField, requestRestaurants, changeRoute, changeRouteToHome } from '../../actions';
+import { HOME, SIGNUP } from '../../constants';
 
 // this can replace searchField in the state
 const mapStateToProps = (state) => {
@@ -27,7 +28,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
 		onRequestRestaurants: () => dispatch(requestRestaurants()),
-		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo))
+		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo)),
+		onRouteToHome: () => dispatch(changeRouteToHome())
 	};
 };
 
@@ -46,9 +48,11 @@ class App extends Component {
 			}
 		};
 	}
+
 	componentDidMount() {
 		this.props.onRequestRestaurants();
 	}
+
 	loadUserProfile = (user) => {
 		this.setState({
 			user: {
@@ -80,13 +84,10 @@ class App extends Component {
 			return restaurants.name.toLowerCase().includes(searchField.toLowerCase());
 		});
 
-		const signIn = <SignIn onRouteChange={onRouteChange} />;
+		const signIn = <SignIn />;
 
 		const signUp = (
-			<SignUp
-				onRouteChange={onRouteChange}
-				loadUserProfile={this.loadUserProfile}
-			/>
+			<SignUp onRouteChange={onRouteChange} loadUserProfile={this.loadUserProfile} />
 		);
 
 		const placeList = (
@@ -96,20 +97,20 @@ class App extends Component {
 			</div>
 		);
 
-		const restaurantDetail = (i) => {
-			const { restaurants, onRouteChange } = this.props;
+		const restaurantDetail = (idx) => {
+			const { restaurants, onRouteChange, onRouteToHome } = this.props;
 			return (
 				<RestaurantDetail
-					onClickChangeRoute={() => onRouteChange('home')}
-					key={restaurants[i].id}
-					name={restaurants[i].name}
-					imageURL={restaurants[i].imageURL}
-					visitedBy={restaurants[i].visited_by}
-					count={restaurants[i].count}
-					location={restaurants[i].location}
-					amount={restaurants[i].amount}
-					fullness={restaurants[i].fullnessfullness}
-					description={restaurants[i].description}
+					onClickChangeRoute={onRouteToHome}
+					key={restaurants[idx].id}
+					name={restaurants[idx].name}
+					imageURL={restaurants[idx].imageURL}
+					visitedBy={restaurants[idx].visited_by}
+					count={restaurants[idx].count}
+					location={restaurants[idx].location}
+					amount={restaurants[idx].amount}
+					fullness={restaurants[idx].fullnessfullness}
+					description={restaurants[idx].description}
 				/>
 			);
 		};
@@ -118,9 +119,9 @@ class App extends Component {
 			<div className="maxWidth" style={ff_a}>
 				<Navigation onRouteChange={onRouteChange} displayMenu={route} />
 				<Scroll>
-					{route === 'home' ? (
+					{route === HOME ? (
 						placeList
-					) : route === 'signUp' ? (
+					) : route === SIGNUP ? (
 						signUp
 					) : typeof route === 'number' ? (
 						restaurantDetail(route)

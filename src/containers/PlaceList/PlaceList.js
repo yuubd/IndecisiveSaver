@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
+	console.log('PLACELIST IS CALLED');
 	return {
 		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo))
 	};

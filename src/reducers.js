@@ -4,9 +4,11 @@ import {
 	REQUEST_RESTAURANTS_SUCCESS,
 	REQUEST_RESTAURANTS_FAILED,
 	CHANGE_ROUTE,
+	CHANGE_ROUTE_HOME,
 	POST_SIGNINFO_NAME,
 	POST_SIGNINFO_PASSWORD,
-	POST_SIGNINFO_EMAIL
+	POST_SIGNINFO_EMAIL,
+	HOME
 } from './constants.js';
 
 const initialStateSearch = {
@@ -21,6 +23,7 @@ export const searchPlaces = (state = initialStateSearch, action = {}) => {
 		case CHANGE_SEARCH_FIELD:
 			// merge state and then action.payload to an empty obj
 			return Object.assign({}, state, { searchField: action.payload });
+
 		default:
 			return state;
 	}
@@ -33,19 +36,17 @@ const initialStateRestaurants = {
 };
 
 export const requestRestaurants = (state = initialStateRestaurants, action = {}) => {
+	console.log('REQUESTRESTAURANTS IS CALLED');
 	switch (action.type) {
 		case REQUEST_RESTAURANTS_PENDING:
 			return Object.assign({}, state, { isPending: true });
+
 		case REQUEST_RESTAURANTS_SUCCESS:
-			return Object.assign({}, state, {
-				restaurants: action.payload,
-				isPending: false
-			});
+			return Object.assign({}, state, { restaurants: action.payload, isPending: false });
+
 		case REQUEST_RESTAURANTS_FAILED:
-			return Object.assign({}, state, {
-				error: action.payload,
-				isPending: false
-			});
+			return Object.assign({}, state, { error: action.payload, isPending: false });
+
 		default:
 			return state;
 	}
@@ -54,10 +55,16 @@ export const requestRestaurants = (state = initialStateRestaurants, action = {})
 const initialRoute = {
 	route: ''
 };
+
 export const changeRoute = (state = initialRoute, action = {}) => {
+	console.log('CHANGEROUTE IS CALLED');
 	switch (action.type) {
 		case CHANGE_ROUTE:
 			return Object.assign({}, state, { route: action.payload });
+
+		case CHANGE_ROUTE_HOME:
+			return Object.assign({}, state, { route: action.payload });
+
 		default:
 			return state;
 	}
@@ -68,20 +75,25 @@ const initialSignInfo = {
 	password: '',
 	name: ''
 };
+
 export const postSignInfo = (state = initialSignInfo, action = {}) => {
+	console.log('POSTSIGNININFO IS CALLED');
 	switch (action.type) {
 		case POST_SIGNINFO_EMAIL:
 			return Object.assign({}, state, {
 				email: action.payload
 			});
+
 		case POST_SIGNINFO_PASSWORD:
 			return Object.assign({}, state, {
 				password: action.payload
 			});
+
 		case POST_SIGNINFO_NAME:
 			return Object.assign({}, state, {
 				name: action.payload
 			});
+
 		default:
 			return state;
 	}
