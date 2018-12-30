@@ -1,6 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { postPassword, postEmail, postName } from '../../actions';
+import {
+	postPassword,
+	postEmail,
+	postName,
+	changeRouteToHome,
+	changeRouteToSignIn,
+	signUpRequest
+} from '../../actions';
 
 const mapStateToProps = (state) => {
 	return {
@@ -14,37 +21,21 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onEmailChange: (event) => dispatch(postEmail(event.target.value)),
 		onPasswordChange: (event) => dispatch(postPassword(event.target.value)),
-		onNameChange: (event) => dispatch(postName(event.target.value))
+		onNameChange: (event) => dispatch(postName(event.target.value)),
+		onRouteToHome: () => dispatch(changeRouteToHome()),
+		onRouteToSignIn: () => dispatch(changeRouteToSignIn()),
+		onSubmitSignUp: (email, password, name) => dispatch(signUpRequest(email, password, name))
 	};
 };
 
 class SignUp extends React.Component {
-	onSubmitSignUp = () => {
-		const { signUpEmail, signUpPassword, signUpName } = this.props;
-		if (!(signUpEmail.length && signUpPassword.length && signUpName.length)) {
-			return;
-		}
-		fetch('http://localhost:3001/signup', {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email: signUpEmail,
-				password: signUpPassword,
-				name: signUpName
-			})
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				// data is user created from signUp
-				if (data) {
-					//this.props.loadUserProfile(data);
-					this.props.onRouteChange('home');
-				}
-			});
+	onSubmit = () => {
+		const { signUpEmail, signUpPassword, signUpName, onSubmitSignUp } = this.props;
+		onSubmitSignUp(signUpEmail, signUpPassword, signUpName);
 	};
 
 	render() {
-		const { onNameChange, onPasswordChange, onEmailChange } = this.props;
+		const { onNameChange, onPasswordChange, onEmailChange, onRouteToSignIn } = this.props;
 		return (
 			<article className="pa4 black-80">
 				<form action="sign-up_submit" method="get" acceptCharset="utf-8">
@@ -94,6 +85,11 @@ class SignUp extends React.Component {
 							type="submit"
 							value="Sign Up"
 						/>
+					</div>
+					<div className="lh-copy mt3">
+						<a onClick={onRouteToSignIn} href="#0" className="f6 link dim black db">
+							Sign in
+						</a>
 					</div>
 				</form>
 			</article>
