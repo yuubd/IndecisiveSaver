@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
 	postPassword,
 	postEmail,
@@ -67,24 +68,31 @@ class SignIn extends React.Component {
 						</div>
 					</fieldset>
 					<div className="">
-						<input
-							onClick={this.onSubmit}
-							className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100"
-							type="submit"
-							value="Sign in"
-						/>
+						<Link to="/user/">
+							<input
+								onClick={this.onSubmit}
+								className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100"
+								type="submit"
+								value="Sign in"
+							/>
+						</Link>
 					</div>
 					<div className="lh-copy mt3">
-						<a onClick={onRouteToSignUp} href="#0" className="f6 link dim black db">
+						<Link
+							onClick={onRouteToSignUp}
+							to="/signup/"
+							className="f6 link dim black db"
+						>
 							Sign up
-						</a>
-						<a
+						</Link>
+						<Link
+							to="/home/"
 							onClick={this.alertTooBadForNow}
 							href="#0"
 							className="f6 link dim black db"
 						>
 							Forgot your password?
-						</a>
+						</Link>
 					</div>
 				</form>
 			</main>

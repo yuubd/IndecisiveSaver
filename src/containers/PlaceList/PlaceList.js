@@ -5,12 +5,12 @@ import { changeRoute } from '../../actions';
 
 const mapStateToProps = (state) => {
 	return {
-		route: state.changeRoute.route
+		route: state.changeRoute.route,
+		restaurants: state.requestRestaurants.restaurants
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	console.log('PLACELIST IS CALLED');
 	return {
 		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo))
 	};
@@ -18,11 +18,10 @@ const mapDispatchToProps = (dispatch) => {
 
 class PlaceList extends React.Component {
 	restauantComponent = this.props.restaurants.map((restaurant, i) => {
-		const { onRouteChange } = this.props;
 		return (
 			<Restaurant
-				onClickChangeRoute={() => onRouteChange(i)}
-				key={restaurant.id}
+				id={restaurant.id}
+				key={i}
 				name={restaurant.name}
 				imageURL={restaurant.imageURL}
 				visitedBy={restaurant.visited_by}

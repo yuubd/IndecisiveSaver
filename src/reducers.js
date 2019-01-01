@@ -46,7 +46,6 @@ const initialRoute = {
 };
 
 export const changeRoute = (state = initialRoute, action = {}) => {
-	console.log('CHANGEROUTE IS CALLED');
 	switch (action.type) {
 		case C.CHANGE_ROUTE:
 			return Object.assign({}, state, { route: action.payload });
@@ -72,7 +71,6 @@ const initialSignInfo = {
 };
 
 export const postSignInfo = (state = initialSignInfo, action = {}) => {
-	console.log('POSTSIGNININFO IS CALLED');
 	switch (action.type) {
 		case C.POST_SIGNINFO_EMAIL:
 			return Object.assign({}, state, {

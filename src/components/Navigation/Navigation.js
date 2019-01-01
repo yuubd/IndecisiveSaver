@@ -15,16 +15,19 @@ const Navigation = (props) => {
 		</ul>
 	);
 	const miniNav = (
-		<ul className="bg-washed-blue pa1 ma0 list flex justify-end">
-			<li>
-				<p className={pStyle}>Account</p>
-			</li>
-			<li>
-				<p onClick={() => props.onRouteChange('signIn')} className={pStyle}>
-					SignOut
-				</p>
-			</li>
-		</ul>
+		<div>
+			<ul className="bg-washed-blue pa1 ma0 list flex justify-end">
+				<li>
+					<p className={pStyle}>Account</p>
+				</li>
+				<li>
+					<p onClick={() => props.onRouteChange('signIn')} className={pStyle}>
+						SignOut
+					</p>
+				</li>
+			</ul>
+			<div className="container">{props.children}</div>
+		</div>
 	);
 
 	return <div>{props.route === 'signIn' ? main : miniNav}</div>;

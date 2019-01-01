@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 import Navigation from '../../components/Navigation/Navigation';
 import PlaceList from '../PlaceList/PlaceList';
 import RestaurantDetail from '../../components/RestaurantDetail/RestaurantDetail.js';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Scroll from '../../components/Scroll/Scroll';
+import Home from '../../components/Home/Home';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import './App.css';
 import { setSearchField, requestRestaurants, changeRoute, changeRouteToHome } from '../../actions';
-import { HOME, SIGNUP } from '../../constants';
 
 // this can replace searchField in the state
 const mapStateToProps = (state) => {
@@ -84,51 +86,35 @@ class App extends Component {
 			return restaurants.name.toLowerCase().includes(searchField.toLowerCase());
 		});
 
-		const signIn = <SignIn />;
+		const signIn = () => <SignIn />;
 
-		const signUp = (
+		const signUp = () => (
 			<SignUp onRouteChange={onRouteChange} loadUserProfile={this.loadUserProfile} />
 		);
 
-		const placeList = (
+		const placeList = () => (
 			<div className="pa0 ma0 width-middle">
 				<SearchBox searchChange={onSearchChange} />
-				<PlaceList restaurants={filteredrestaurants} />
+				<PlaceList />
 			</div>
 		);
 
-		const restaurantDetail = (idx) => {
-			const { restaurants, onRouteChange, onRouteToHome } = this.props;
-			return (
-				<RestaurantDetail
-					onClickChangeRoute={onRouteToHome}
-					key={restaurants[idx].id}
-					name={restaurants[idx].name}
-					imageURL={restaurants[idx].imageURL}
-					visitedBy={restaurants[idx].visited_by}
-					count={restaurants[idx].count}
-					location={restaurants[idx].location}
-					amount={restaurants[idx].amount}
-					fullness={restaurants[idx].fullnessfullness}
-					description={restaurants[idx].description}
-				/>
-			);
-		};
-
 		return (
 			<div className="maxWidth" style={ff_a}>
-				<Navigation onRouteChange={onRouteChange} displayMenu={route} />
-				<Scroll>
-					{route === HOME ? (
-						placeList
-					) : route === SIGNUP ? (
-						signUp
-					) : typeof route === 'number' ? (
-						restaurantDetail(route)
-					) : (
-						signIn
-					)}
-				</Scroll>
+				<Router>
+					<div>
+						<Route path="/" exact component={Home} />
+						<Navigation>
+							<Route path="/signin" exact component={signIn} />
+							<Route path="/signup" component={signUp} />
+							<Route path="/user" component={placeList} />
+							<Route
+								path="/user/:id"
+								render={(props) => <RestaurantDetail {...props} />}
+							/>
+						</Navigation>
+					</div>
+				</Router>
 			</div>
 		);
 	}
