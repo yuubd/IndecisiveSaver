@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Route,
+	Link,
+	Redirect,
+	withRouter,
+	Switch
+} from 'react-router-dom';
 
 import Navigation from '../../components/Navigation/Navigation';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import PlaceList from '../PlaceList/PlaceList';
 import RestaurantDetail from '../../components/RestaurantDetail/RestaurantDetail.js';
 import SearchBox from '../../components/SearchBox/SearchBox';
@@ -11,7 +19,7 @@ import Home from '../../components/Home/Home';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import './App.css';
-import { setSearchField, requestRestaurants, changeRoute, changeRouteToHome } from '../../actions';
+import { setSearchField, requestRestaurants } from '../../actions';
 
 // this can replace searchField in the state
 const mapStateToProps = (state) => {
@@ -19,8 +27,7 @@ const mapStateToProps = (state) => {
 		searchField: state.searchPlaces.searchField,
 		restaurants: state.requestRestaurants.restaurants,
 		pending: state.requestRestaurants.isPending,
-		error: state.requestRestaurants.error,
-		route: state.changeRoute.route
+		error: state.requestRestaurants.error
 	};
 };
 
@@ -29,9 +36,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-		onRequestRestaurants: () => dispatch(requestRestaurants()),
-		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo)),
-		onRouteToHome: () => dispatch(changeRouteToHome())
+		onRequestRestaurants: () => dispatch(requestRestaurants())
 	};
 };
 
@@ -66,21 +71,9 @@ class App extends Component {
 			}
 		});
 	};
-	// onSearchChange = (event) => {
-	// 	this.setState({
-	// 		searchField: event.target.value
-	// 	});
-	// };
 
 	render() {
-		const {
-			searchField,
-			onSearchChange,
-			onRouteChange,
-			restaurants,
-			isPending,
-			route
-		} = this.props;
+		const { searchField, onSearchChange, onRouteChange, restaurants } = this.props;
 
 		const filteredrestaurants = restaurants.filter((restaurants) => {
 			return restaurants.name.toLowerCase().includes(searchField.toLowerCase());
@@ -102,18 +95,15 @@ class App extends Component {
 		return (
 			<div className="maxWidth" style={ff_a}>
 				<Router>
-					<div>
-						<Route path="/" exact component={Home} />
+					<Switch>
+						<Route exact path="/" component={Home} />
 						<Navigation>
 							<Route path="/signin" exact component={signIn} />
 							<Route path="/signup" component={signUp} />
-							<Route path="/user" component={placeList} />
-							<Route
-								path="/user/:id"
-								render={(props) => <RestaurantDetail {...props} />}
-							/>
+							<Route exact path="/user/:email" component={placeList} />
+							<Route path="/user/:email/:id" component={RestaurantDetail} />
 						</Navigation>
-					</div>
+					</Switch>
 				</Router>
 			</div>
 		);

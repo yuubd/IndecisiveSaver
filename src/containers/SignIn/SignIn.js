@@ -1,19 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {
-	postPassword,
-	postEmail,
-	signInRequest,
-	changeRoute,
-	changeRouteToHome,
-	changeRouteToSignUp
-} from '../../actions';
+import { postPassword, postEmail, signInRequest, isLoggedIn } from '../../actions';
 
 const mapStateToProps = (state) => {
 	return {
 		signInEmail: state.postSignInfo.email,
-		signInPassword: state.postSignInfo.password
+		signInPassword: state.postSignInfo.password,
+		isLoggedIn: state.postSignInfo.logInStatus
 	};
 };
 
@@ -21,10 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onEmailChange: (event) => dispatch(postEmail(event.target.value)),
 		onPasswordChange: (event) => dispatch(postPassword(event.target.value)),
-		onSubmitSignIn: (email, password) => dispatch(signInRequest(email, password)),
-		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo)),
-		onRouteToHome: () => dispatch(changeRouteToHome()),
-		onRouteToSignUp: () => dispatch(changeRouteToSignUp())
+		onSubmitSignIn: (email, password) => dispatch(signInRequest(email, password))
 	};
 };
 
@@ -39,7 +30,7 @@ class SignIn extends React.Component {
 	};
 
 	render() {
-		const { onRouteToSignUp, onPasswordChange, onEmailChange } = this.props;
+		const { onRouteToSignUp, onPasswordChange, onEmailChange, signInEmail } = this.props;
 
 		return (
 			<main className="pa4 black-80">
@@ -68,7 +59,7 @@ class SignIn extends React.Component {
 						</div>
 					</fieldset>
 					<div className="">
-						<Link to="/user/">
+						<Link to={'/user/' + signInEmail}>
 							<input
 								onClick={this.onSubmit}
 								className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100"
@@ -86,7 +77,7 @@ class SignIn extends React.Component {
 							Sign up
 						</Link>
 						<Link
-							to="/home/"
+							to="/signin"
 							onClick={this.alertTooBadForNow}
 							href="#0"
 							className="f6 link dim black db"

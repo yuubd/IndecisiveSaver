@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
 	return {
-		restaurants: state.requestRestaurants.restaurants
+		restaurants: state.requestRestaurants.restaurants,
+		email: state.postSignInfo.email
 	};
 };
 
@@ -27,7 +28,7 @@ class RestaurantDetail extends Component {
 	}
 
 	render() {
-		const { restaurants } = this.props;
+		const { restaurants, email } = this.props;
 		const idx = this.getIndex(this.props.match.params.id);
 		const key = restaurants[idx].id;
 		const name = restaurants[idx].name;
@@ -58,7 +59,10 @@ class RestaurantDetail extends Component {
 
 		return (
 			<div>
-				<Link className="f6 lh-copy measure ma0 mr1 fr mid-gray pointer" to="/user/">
+				<Link
+					className="f6 lh-copy measure ma0 mr1 fr mid-gray pointer"
+					to={'/user/' + email}
+				>
 					My list
 				</Link>
 				<article className="br2 dark-gray b--black-10 w-100 w-100-m w-25-l center">

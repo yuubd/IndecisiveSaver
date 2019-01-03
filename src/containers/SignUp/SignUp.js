@@ -9,6 +9,8 @@ import {
 	signUpRequest
 } from '../../actions';
 
+import { Link } from 'react-router-dom';
+
 const mapStateToProps = (state) => {
 	return {
 		signUpEmail: state.postSignInfo.email,
@@ -87,9 +89,9 @@ class SignUp extends React.Component {
 						/>
 					</div>
 					<div className="lh-copy mt3">
-						<a onClick={onRouteToSignIn} href="#0" className="f6 link dim black db">
+						<Link to="/signin" className="f6 link dim black db">
 							Sign in
-						</a>
+						</Link>
 					</div>
 				</form>
 			</article>
