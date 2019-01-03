@@ -31,33 +31,29 @@ const Restaurant = (props) => {
 
 	const fontStyle = 'fw1 pa0 pl2 ma0 gray';
 	return (
-		<Link to={'/user/' + `${props.id}`} style={{ textDecoration: 'none' }}>
-			<article className="mw9 center bg-white br3 mv1 ba b--black-10">
-				<div className="flex">
-					<div className="width-prop">
-						<img
-							className="pa0 ma0 bn br2"
-							src={require(`${props.imageURL}`)}
-							alt={props.imageURL}
-						/>
-					</div>
-					<ul className="text flex list flex-column ma0 pa0 dark-gray">
-						<p className="pa0 ma0 pl2 fw-b name-font-sty">{props.name}</p>
-						<ul className="flex list ma0 pa0">
-							<p className={fontStyle}>{props.visitedBy}</p>
-							<ul className="flex flex-row list pa0 ma0 bn ">
-								{burgers(props.count)}
-							</ul>
-						</ul>
-						<p className={fontStyle}>{props.location}</p>
-						<p className={fontStyle}>$ {props.amount}</p>
-						<p className={fontStyle}>{props.fullness}</p>
-						<p className={fontStyle}>{shorten(props.description)}</p>
-					</ul>
-					<br />
+		<article className="mw9 center bg-white br3 mv1 ba b--black-10">
+			<div className="flex">
+				<div className="width-prop">
+					<img
+						className="pa0 ma0 bn br2"
+						src={require(`${props.imageURL}`)}
+						alt={props.imageURL}
+					/>
 				</div>
-			</article>
-		</Link>
+				<ul className="text flex list flex-column ma0 pa0 dark-gray">
+					<p className="pa0 ma0 pl2 fw-b name-font-sty">{props.name}</p>
+					<ul className="flex list ma0 pa0">
+						<p className={fontStyle}>{props.visitedBy}</p>
+						<ul className="flex flex-row list pa0 ma0 bn ">{burgers(props.count)}</ul>
+					</ul>
+					<p className={fontStyle}>{props.location}</p>
+					<p className={fontStyle}>$ {props.amount}</p>
+					<p className={fontStyle}>{props.fullness}</p>
+					<p className={fontStyle}>{shorten(props.description)}</p>
+				</ul>
+				<br />
+			</div>
+		</article>
 	);
 };
 
