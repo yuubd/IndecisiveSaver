@@ -55,27 +55,28 @@ export const postName = (name) => ({
 	payload: name
 });
 
+export const loggedIn = () => ({
+	type: C.POST_SIGNINFO_LOGINSTATUS,
+	payload: true
+});
+
 export const signInRequest = (email, password) => (dispatch) => {
-	console.log('FETCHING IS CALLED');
 	fetch('http://localhost:3001/signin', {
 		method: 'post',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ email, password }, getCircularReplacer())
 	})
 		.then((response) => {
-			console.log('FETCHING2 IS CALLED');
-			console.log(response);
 			return response.json();
 		})
 		.then((user) => {
-			console.log('FETCHING3 IS CALLED');
 			if (user.id.length > 0) {
-				return dispatch(changeRoute(C.HOME));
+				return dispatch(loggedIn());
 			}
 		})
 		.catch((err) => {
+			console.log('ERR is : ' + err);
 			alert('Account or password is incorrect');
-			console.log('SignIn error: ' + err);
 		});
 };
 

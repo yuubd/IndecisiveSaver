@@ -67,7 +67,8 @@ export const changeRoute = (state = initialRoute, action = {}) => {
 const initialSignInfo = {
 	email: '',
 	password: '',
-	name: ''
+	name: '',
+	logInStatus: false
 };
 
 export const postSignInfo = (state = initialSignInfo, action = {}) => {
@@ -85,6 +86,11 @@ export const postSignInfo = (state = initialSignInfo, action = {}) => {
 		case C.POST_SIGNINFO_NAME:
 			return Object.assign({}, state, {
 				name: action.payload
+			});
+
+		case C.POST_SIGNINFO_LOGINSTATUS:
+			return Object.assign({}, state, {
+				logInStatus: action.payload
 			});
 
 		default:
