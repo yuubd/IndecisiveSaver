@@ -1,87 +1,100 @@
-import { userConstants } from './constants/userConstants.js';
+import { userConstants } from '../_constants/userConstants.js';
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory();
 
 export const userActions = {
 	login,
 	logout,
-	signUp,
-	getAll,
-	delete: _delete
+	signUp
+	// getAll,
+	// delete: _delete
 };
 
-login = (email, password) => (dispatch) => {
-	dispatch(request());
-
-	const token = {
-		method: 'post',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email, password }, getCircularReplacer())
-	};
-
-	fetch('http://localhost:3001/signin', token)
-		.then((res) => {
-			return res.json();
-		})
-		.then((user) => {
-			if (user.id.length > 0) {
-				return dispatch(success());
-			}
-		})
-		.catch((err) => {
-			console.log('ERR msg is : ' + err);
-			alert('Account or password is incorrect');
-			dispatch(failure());
-		});
-
-	const request = () => ({ type: userConstants.LOGIN_REQUEST, pending: true });
-	const success = () => ({ type: userConstants.LOGIN_REQUEST, pending: true });
-	const failure = () => ({ type: userConstants.LOGIN_REQUEST, pending: true });
-	const getCircularReplacer = () => {
-		const seen = new WeakSet();
-		return (key, value) => {
-			if (typeof value === 'object' && value !== null) {
-				if (seen.has(value)) {
-					return;
-				}
-				seen.add(value);
-			}
-			return value;
+function login(email, password) {
+	return (dispatch) => {
+		const token = {
+			method: 'post',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email, password }, getCircularReplacer())
 		};
+
+		fetch('http://localhost:3001/signin', token)
+			.then((res) => {
+				return res.json();
+			})
+			.then((user) => {
+				if (user.id.length > 0) {
+					dispatch(success());
+					history.push('/user/' + email);
+				}
+			})
+			.catch((err) => {
+				console.log('ERR msg is : ' + err);
+				alert('Account or password is incorrect');
+				dispatch(failure());
+			});
+
+		function request() {
+			return { type: userConstants.LOGIN_REQUEST, pending: true };
+		}
+		function success() {
+			return { type: userConstants.LOGIN_REQUEST, pending: true };
+		}
+		function failure() {
+			return { type: userConstants.LOGIN_REQUEST, pending: true };
+		}
+
+		function getCircularReplacer() {
+			const seen = new WeakSet();
+			return (key, value) => {
+				if (typeof value === 'object' && value !== null) {
+					if (seen.has(value)) {
+						return;
+					}
+					seen.add(value);
+				}
+				return value;
+			};
+		}
 	};
-};
+}
 
-logout = () => (dispatch) => {
-	return dispatch({ type: userConstants.LOGOUT });
-};
+function logout() {
+	return (dispatch) => dispatch({ type: userConstants.LOGOUT });
+}
 
-signUp = (email, password, name) => (dispatch) => {
-	if (!(email.length && password.length && name.length)) return;
+function signUp(email, password, name) {
+	return (dispatch) => {
+		if (!(email.length && password.length && name.length)) return;
 
-	dispatch(request());
+		dispatch(request());
 
-	const token = {
-		method: 'post',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email, password, name })
+		const token = {
+			method: 'post',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email, password, name })
+		};
+
+		fetch('http://localhost:3001/signup', token)
+			.then((res) => res.json())
+			.then((user) => {
+				if (user) {
+					//this.props.loadUserProfile(data);
+					return dispatch(success());
+				}
+			})
+			.catch((err) => {
+				console.log('Err msg is : ' + err);
+				alert('Something went wrong');
+				dispatch(failure());
+			});
+
+		const request = () => ({ type: userConstants.SIGNUP_REQUEST });
+		const success = () => ({ type: userConstants.SIGNUP_SUCESS });
+		const failure = () => ({ type: userConstants.SIGNUP_FAILURE });
 	};
-
-	fetch('http://localhost:3001/signup', token)
-		.then((res) => res.json())
-		.then((user) => {
-			if (user) {
-				//this.props.loadUserProfile(data);
-				return dispatch(success());
-			}
-		})
-		.catch((err) => {
-			console.log('Err msg is : ' + err);
-			alert('Something went wrong');
-			dispatch(failure());
-		});
-
-	const request = () => ({ type: userConstants.SIGNUP_REQUEST, payload: true });
-	const success = () => ({ type: userConstants.SIGNUP_SUCESS });
-	const failure = () => ({ type: userConstants.SIGNUP_FAILURE });
-};
+}
 
 // // this is filetering placelist action
 // // payload is whatever data needed to go on to the reducer
