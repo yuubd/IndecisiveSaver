@@ -7,16 +7,20 @@ import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App/App';
 import registerServiceWorker from './registerServiceWorker';
-import { searchPlaces, requestRestaurants, changeRoute, postSignInfo } from './reducers';
+import { diners } from './_reducers/dinerReducer';
+import { users } from './_reducers/userReducer';
+import { signup } from './_reducers/signupReducer';
+import { auth } from './_reducers/authReducer';
+
 import 'tachyons';
 
 const logger = createLogger();
 
 const rootReducer = combineReducers({
-	searchPlaces,
-	requestRestaurants,
-	changeRoute,
-	postSignInfo
+	diners,
+	auth,
+	signup,
+	users
 });
 
 // usually because there are many reducers the parameter should be rootReducer
